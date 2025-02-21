@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct Node 
+{
+    int data;
+    struct Node*next;
+};
+void insertEnd(struct Node* *head,int data)
+{
+   struct Node*n;
+   n=(struct Node*)malloc(sizeof(struct Node));
+   n->data=data;
+   n->next=NULL;
+   struct Node *temp=*head;
+   
+   if(*head==NULL)
+   {
+       *head=n;
+       return ;
+   }
+   while(temp->next!=NULL)
+       temp=temp->next;
+       temp->next=n;
+   
+}
+void display(struct Node*node)
+{
+    while(node!=NULL)
+    {
+        printf("%d  ",node->data);
+        node=node->next;
+    }
+    printf(" \n ");
+}
+int main()
+{
+    struct Node*head;
+    struct Node*node2;
+    struct Node*node3;
+    struct Node*node4;
+    
+    head=(struct Node*)malloc(sizeof(struct Node));
+    node2=(struct Node*)malloc(sizeof(struct Node));
+    node3=(struct Node*)malloc(sizeof(struct Node));
+    node4=(struct Node*)malloc(sizeof(struct Node));
+    
+    head->data=10;
+    head->next=node2;
+    node2->data=15;
+    node2->next=node3;
+    node3->data=20;
+    node3->next=node4;
+    node4->data=25;
+    node4->next=NULL;
+    
+    printf("LINKEDLIST: ");
+    display(head);
+    
+    insertEnd(&head,11);
+    
+    printf("\n After inserting Linkedlist \n");
+    printf("\n Linkedlist: \n");
+    display(head);
+}
+
+
+
+OUTPUT:
+    LINKEDLIST:10 15 20 25 
+
+    After inserting Linkedlist
+
+    Linkedlist: 10 15 20 25 11
