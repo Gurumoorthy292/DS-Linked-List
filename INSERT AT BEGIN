@@ -1,0 +1,178 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+  int data;
+  struct Node *next;
+};
+
+void insertStart (struct Node* *head, int data)
+{
+
+  struct Node *newNode = (struct Node *) malloc (sizeof (struct Node));
+
+  newNode->data = data;
+  newNode->next = *head;
+
+  
+  *head = newNode;
+}
+
+void display (struct Node *node)
+{
+
+  
+  while (node != NULL)
+    {
+      printf ("%d ", node->data);
+      node = node->next;
+    }
+  printf ("\n");
+}
+
+int main ()
+{
+  int num,a,b;
+  
+  printf("Enter the num: ");
+  scanf("%d",&num);
+  
+ 
+  struct Node *head=(struct Node*)malloc(sizeof(struct Node));
+  printf("\nEnter the Elements: \n");
+  scanf("%d",&head->data);
+  head->next=NULL;
+  struct Node *temp=head;
+  for(int i=1;i<num;i++)
+  {
+       struct Node *n=(struct Node*)malloc(sizeof(struct Node));
+       scanf("%d",&n->data);
+       n->next=NULL;
+       temp->next=n;
+       temp=temp->next;
+  }
+  printf ("Linklist : ");
+  display (head);
+  printf("\nEnter the element to be inserted: ");
+  scanf("%d",&b);
+  insertStart (&head, b);
+
+  printf ("\nAfter Inserting Element\n");
+  printf ("\nLinklist : ");
+  display (head);
+  return 0;
+}
+
+OUTPUT:
+      [?2004l
+Enter the num: 5
+
+Enter the Elements: 
+1
+2
+3
+4
+5
+Linklist : 1 2 3 4 5 
+
+Enter the element to be inserted: 25
+
+After Inserting Element
+
+Linklist : 25 1 2 3 4 5 
+
+
+
+
+
+
+
+
+OR
+
+
+
+
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+  int data;
+  struct Node *next;
+};
+
+void insertStart (struct Node **head, int data)
+{
+
+  struct Node *newNode = (struct Node *) malloc (sizeof (struct Node));
+
+  newNode->data = data;
+  newNode->next = *head;
+
+  
+  *head = newNode;
+}
+
+void display (struct Node *node)
+{
+
+  
+  while (node != NULL)
+    {
+      printf ("%d ", node->data);
+      node = node->next;
+    }
+  printf ("\n");
+}
+
+int main ()
+{
+
+ 
+  struct Node *head ;
+  struct Node *node2 ;
+  struct Node *node3 ;
+  struct Node *node4;
+
+
+  head = (struct Node *) malloc (sizeof (struct Node));
+  node2 = (struct Node *) malloc (sizeof (struct Node));
+  node3 = (struct Node *) malloc (sizeof (struct Node));
+  node4 = (struct Node *) malloc (sizeof (struct Node));
+
+
+  head->data = 15;		
+  head->next = node2;	
+  node2->data = 10;
+  node2->next = node3;
+
+  node3->data = 12;
+  node3->next = node4;
+
+  node4->data = 3;
+  node4->next = NULL;
+
+  printf ("Linklist : ");
+  display (head);
+  insertStart (&head, 25);
+
+  printf ("\nAfter Inserting Element\n");
+  printf ("\nLinklist : ");
+  display (head);
+  return 0;
+}
+
+
+
+
+OUTPUT:
+  Linkedlist: 15 10 12 3
+
+  After Inserting element
+
+  Linkedlist: 25 15 10 12 3
