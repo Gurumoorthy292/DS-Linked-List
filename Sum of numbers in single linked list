@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+  int data;
+  struct Node *next;
+};
+
+void insertStart (struct Node* *head, int data)
+{
+
+  struct Node *newNode = (struct Node *) malloc (sizeof (struct Node));
+
+  newNode->data = data;
+  newNode->next = *head;
+
+  
+  *head = newNode;
+}
+
+void display (struct Node *node)
+{
+
+  int sum=0;
+  while (node != NULL)
+    {
+        
+      sum+=(node->data);  
+      
+      node = node->next;
+    }
+    printf ("%d ", sum);
+  printf ("\n");
+}
+
+int main ()
+{
+  int num,a,b;
+  
+  printf("Enter the num: ");
+  scanf("%d",&num);
+  
+ 
+  struct Node *head=(struct Node*)malloc(sizeof(struct Node));
+  printf("\nEnter the Elements: \n");
+ scanf("%d",&head->data);
+ head->next=NULL;
+ struct Node *temp=head;
+ for(int i=1;i<=num;i++)
+ {
+     struct Node *n=(struct Node*)malloc(sizeof(struct Node));
+     scanf("%d",&n->data);
+     n->next=NULL;
+     temp->next=n;
+     temp=temp->next;
+ }
+  printf ("Linklist : ");
+  display (head);
+  printf("\nEnter the element to be inserted: ");
+  scanf("%d",&b);
+  insertStart (&head, b);
+
+  printf ("\nAfter Inserting Element\n");
+  printf ("\nLinklist : ");
+  display (head);
+  return 0;
+}
+
+OUTPUT:
+
+[?2004l
+Enter the num: 2
+
+Enter the Elements: 
+
+1
+2
+3
+Linklist : 6 
+
+Enter the element to be inserted: 2
+
+After Inserting Element
+
+Linklist : 8 
