@@ -14,7 +14,7 @@ void deleteEnd (struct Node* *head)
 
   struct Node*temp=*head;
   struct Node*previous;
-  
+ 
   while(temp->next!=NULL)
   {
       previous=temp;
