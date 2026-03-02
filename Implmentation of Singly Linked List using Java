@@ -1,0 +1,215 @@
+                                            Implmentation of Singly Linked List using Java
+SOURCE CODE:
+
+import java.util.*;
+
+class Node 
+{
+    int data;
+    Node next;
+
+    Node(int val)
+    {
+        this.data = val;
+        this.next = null;
+    }
+}
+
+class LinkedList 
+{
+    Node head, tail;
+    int count=0;
+    LinkedList()
+    {
+        head = tail = null;
+    }
+
+    void insertAtEnd(int val)
+    {
+        Node n = new Node(val);
+
+        if (head == null)
+        {
+            head = tail = n;   
+        }
+        else 
+        {
+            tail.next = n;
+            tail = n;
+        }
+    }
+    
+    void insertAtBegin(int val)
+    {
+        Node n = new Node(val);
+        
+        if(head==null)
+        {
+            head=tail=n;
+        }
+        n.next=head;
+        head=n;
+    }
+    
+    void insertAtMiddle(int val) {
+        Node newNode = new Node(val);
+
+        if (head == null) {
+            head = tail = newNode;
+            return;
+        }
+
+        Node slow = head;
+        Node fast = head;
+        Node prev = null; // track node before slow
+
+        // 2️⃣ Move slow and fast pointers
+        while (fast != null && fast.next != null) {
+            prev = slow;        // previous node to slow
+            slow = slow.next;   // move 1 step
+            fast = fast.next.next; // move 2 steps
+        }
+
+        // 3️⃣ Insert new node before slow (middle)
+        newNode.next = slow;
+
+        if (prev != null) {
+            prev.next = newNode;
+        } else {
+            // if list has only one element
+            head = newNode;
+        }
+
+        // 4️⃣ Update tail if inserted at end
+        if (newNode.next == null) {
+            tail = newNode;
+        }
+    }
+    
+    void deleteAtEnd()
+    {
+    	if(head==null)
+    	{
+    		System.out.println("List is empty");
+    		return;
+    	}
+    	
+    	if(head.next==null)
+    	{
+    		head=tail=null;
+    		return;
+    	} 
+    	
+    	Node temp = head;
+    	while(temp.next!=tail)
+    	{
+    		temp=temp.next;
+    	}
+    	temp.next=null;
+    	tail=temp;
+    }
+    
+    void deleteAtBegin()
+    {
+    	if(head==null)
+    	{
+    		System.out.println("List is empty");
+    		return;
+    	}
+    	
+    	Node temp = head;
+    	head = temp.next;
+    	temp = null;
+    	
+    }
+    
+    void deleteAtMiddle()
+    {
+    	 Node slow = head;
+         Node fast = head;
+         Node prev = null; // track node before slow
+
+         // 2️⃣ Move slow and fast pointers
+         while (fast != null && fast.next != null) {
+             prev = slow;        // previous node to slow
+             slow = slow.next;   // move 1 step
+             fast = fast.next.next; // move 2 steps
+         }
+         
+         prev.next=slow.next;
+        
+    }
+
+    void display() 
+    {
+        Node temp = head;   
+
+        while (temp != null) 
+        {
+            System.out.print(temp.data);
+            count++;
+            temp = temp.next;
+            if(temp != null)
+            {
+                System.out.print(" ");
+            }
+        }
+        System.out.println("\n");
+    }
+}
+
+public class Main {
+    public static void main(String[] args)
+    {
+        LinkedList ll = new LinkedList();  
+
+        ll.insertAtEnd(10);
+        ll.insertAtEnd(20);
+        ll.insertAtEnd(30);
+        ll.insertAtEnd(40);
+        ll.insertAtEnd(100);
+        
+        System.out.println("Insert at End: ");
+        ll.display();
+        
+        System.out.println("Insert at Begin: ");
+        ll.insertAtBegin(50);
+        ll.display();
+        
+        System.out.println("Insert at Middle: ");
+        ll.insertAtMiddle(60);
+        ll.display();
+        
+        System.out.println("Delete at End: ");
+        ll.deleteAtEnd();
+        ll.display();
+        
+        System.out.println("Delete at Begin: ");
+        ll.deleteAtBegin();
+        ll.display();
+        
+        System.out.println("Delete at Middle: ");
+        ll.deleteAtMiddle();
+        ll.display();
+    }
+} 
+
+OUTPUT:
+
+Insert at End: 
+10 20 30 40 100
+
+Insert at Begin: 
+50 10 20 30 40 100
+
+Insert at Middle: 
+50 10 20 60 30 40 100
+
+Delete at End: 
+50 10 20 60 30 40
+
+Delete at Begin: 
+10 20 60 30 40
+
+Delete at Middle: 
+10 20 30 40
