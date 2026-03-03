@@ -1,0 +1,185 @@
+                                Implementation of Doubly LinkedList using Java
+
+package Doubly_LinkedList;
+
+class Node
+{
+	int data;
+	Node next, prev;
+	Node(int val){
+		this.data = val;
+		this.next = null;
+		this.prev = null;
+	}
+}
+
+class doublyList
+{
+	Node head, tail;
+	doublyList(){
+		head=tail=null;
+	}
+	
+	void insertAtBegin(int val)
+	{
+		Node n = new Node(val);
+		if(head==null)
+		{
+			head=tail=n;
+			return;
+		}
+		
+		n.next = head;
+		head.prev = n;
+		head = n;
+	}
+	
+	void insertAtEnd(int val)
+	{
+		Node n = new Node(val);
+		if(head==null)
+		{
+			head=tail=n;
+			return;
+		}
+		tail.next = n;
+		n.prev = tail;
+		tail = n;
+	}
+	
+	void insertAtMiddle(int val)
+	{
+		Node n = new Node(val);
+		if(head==null)
+		{
+			head=tail=n;
+			return;
+		}
+		Node slow = head;
+		Node fast = head;
+		Node pre = null;
+		while(fast!=null && fast.next!=null)
+		{
+			pre = slow;
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		pre.next = n;
+		n.prev = pre;
+		n.next = slow;
+		slow.prev = n;
+	}
+	
+	void deleteAtBegin()
+	{
+		if(head == null)
+		{
+			System.out.println("List is Empty");
+		}
+		Node temp = head;
+		head = temp.next;
+		temp = null;
+	}
+	
+	void deleteAtEnd()
+	{
+		if(head == null)
+		{
+			System.out.println("List is Empty");
+			return;
+		}
+		tail = tail.prev;
+		tail.next = null;
+	}
+	
+	void deleteAtMiddle()
+	{
+	    if(head == null)
+	        return;
+
+	    if(head.next == null)
+	    {
+	        head = tail = null;
+	        return;
+	    }
+
+	    Node slow = head;
+	    Node fast = head;
+
+	    while(fast != null && fast.next != null)
+	    {
+	        slow = slow.next;
+	        fast = fast.next.next;
+	    }
+
+	    slow.prev.next = slow.next;
+	    slow.next.prev = slow.prev;
+	}
+	
+	void display()
+	{
+		Node temp = head;
+		while(temp!=null)
+		{
+			System.out.print(temp.data + " ");
+			temp = temp.next;
+		}
+		System.out.println('\n');
+	}
+}
+
+public class Main {
+
+	public static void main(String[] args) {
+		doublyList dl = new doublyList();
+		 dl.insertAtEnd(10);
+	     dl.insertAtEnd(20);
+	     dl.insertAtEnd(30);
+         dl.insertAtEnd(40);
+	     dl.insertAtEnd(100);
+	       
+	     System.out.println("Insert at End: ");
+	     dl.display();
+	        
+	     System.out.println("Insert at Begin: ");
+	     dl.insertAtBegin(50);
+	     dl.display();
+	        
+	     System.out.println("Insert at Middle: ");
+	     dl.insertAtMiddle(60);
+	     dl.display();
+	        
+	     System.out.println("Delete at End: ");
+	     dl.deleteAtEnd();
+	     dl.display();
+	      
+	     System.out.println("Delete at Begin: ");
+	     dl.deleteAtBegin();
+	     dl.display();
+	        
+	     System.out.println("Delete at Middle: ");
+	     dl.deleteAtMiddle();
+	     dl.display();
+	}
+
+}
+
+OUTPUT:
+
+Insert at End: 
+10 20 30 40 100 
+
+Insert at Begin: 
+50 10 20 30 40 100 
+
+Insert at Middle: 
+50 10 20 60 30 40 100 
+
+Delete at End: 
+50 10 20 60 30 40 
+
+Delete at Begin: 
+10 20 60 30 40 
+
+Delete at Middle: 
+10 20 30 40 
