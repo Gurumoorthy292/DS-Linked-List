@@ -75,10 +75,10 @@ class doublyList
 		if(head == null)
 		{
 			System.out.println("List is Empty");
+			return;
 		}
-		Node temp = head;
-		head = temp.next;
-		temp = null;
+		head = head.next;
+	    head.prev = null;
 	}
 	
 	void deleteAtEnd()
@@ -126,6 +126,17 @@ class doublyList
 		}
 		System.out.println('\n');
 	}
+	
+	void backward()
+	{
+		Node temp = tail;
+		while (temp!=null)
+		{
+			System.out.print(temp.data + " ");
+			temp = temp.prev;
+		}
+		System.out.println();
+	}
 }
 
 public class Main {
@@ -142,7 +153,7 @@ public class Main {
 	     dl.display();
 	        
 	     System.out.println("Insert at Begin: ");
-	     dl.insertAtBegin(50);
+	     dl.insertAtBegin(90);
 	     dl.display();
 	        
 	     System.out.println("Insert at Middle: ");
@@ -160,6 +171,8 @@ public class Main {
 	     System.out.println("Delete at Middle: ");
 	     dl.deleteAtMiddle();
 	     dl.display();
+	     
+	     dl.backward();
 	}
 
 }
@@ -170,16 +183,18 @@ Insert at End:
 10 20 30 40 100 
 
 Insert at Begin: 
-50 10 20 30 40 100 
+90 10 20 30 40 100 
 
 Insert at Middle: 
-50 10 20 60 30 40 100 
+90 10 20 60 30 40 100 
 
 Delete at End: 
-50 10 20 60 30 40 
+90 10 20 60 30 40 
 
 Delete at Begin: 
 10 20 60 30 40 
 
 Delete at Middle: 
 10 20 30 40 
+
+40 30 20 10 
